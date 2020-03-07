@@ -7,7 +7,7 @@ import { store } from "./store";
 
 import Configuration from "./configuration";
 
-import {Safr} from "./components/safr";
+import Safr from "./components/safr";
 
 // Load the configuration from the 'configuration' scope variable
 
@@ -21,7 +21,7 @@ declare const configuration : Configuration
 // Bootstrap React, and Redux
 ReactDOM.render(
     <Provider store={store}>
-            <Safr />
+        <Safr />
     </Provider>,
     document.getElementById(configuration.containerId)
 );
