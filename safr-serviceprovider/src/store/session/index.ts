@@ -3,27 +3,39 @@ import { CaseReducer, PayloadAction, createSlice, Dispatch } from "@reduxjs/tool
 // State Definitions
 interface State {
     jwt: string;
+
+    isLoggedIn: boolean;
 }
 
 const initialState : State = {
-    jwt: ""
+    jwt: "",
+    isLoggedIn: false
 }
 
 // Reducer Methods
-const setJwt : CaseReducer<State, PayloadAction<{jwt: string}>> = (state, action) => { 
+const loggedIn : CaseReducer<State, PayloadAction<{}>> = (state, action) => { 
     return {
         ...state, 
-        jwt: action.payload.jwt
+        isLoggedIn: true
+    }
+}
+
+const loggedOut : CaseReducer<State, PayloadAction<{}>> = (state, action) => { 
+    return {
+        ...state, 
+        isLoggedIn: false
     }
 }
 
 const userSlice = createSlice({
     name: "session",
     initialState: initialState,
-    reducers: { }
+    reducers: { 
+        loggedIn,
+        loggedOut
+    }
 });
 
 // Setup the Exports
 export { State }
 export const {actions, reducer} = userSlice;
-export const thunks = { }
