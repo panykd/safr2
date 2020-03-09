@@ -1,10 +1,12 @@
 import thunkMiddleware from "redux-thunk"
 import { configureStore, getDefaultMiddleware, AnyAction, Reducer } from "@reduxjs/toolkit"
 
-import * as Session from "./session"
+import * as Session from "./session";
+import * as Configuration from "./configuration";
 
 export interface AppState {
     session: Session.State;
+    configuration: Configuration.State;
 }
 
 type Reducers<T> = {
@@ -12,7 +14,8 @@ type Reducers<T> = {
 }
 
 const reducer : Reducers<AppState> = {
-    session: Session.reducer
+    session: Session.reducer,
+    configuration: Configuration.reducer
 }
 
 const middleware = [...getDefaultMiddleware(), thunkMiddleware]
