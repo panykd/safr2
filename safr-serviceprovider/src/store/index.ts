@@ -3,10 +3,12 @@ import { configureStore, getDefaultMiddleware, AnyAction, Reducer } from "@redux
 
 import * as Session from "./session";
 import * as Configuration from "./configuration";
+import * as Profiles from "./profiles";
 
 export interface AppState {
     session: Session.State;
     configuration: Configuration.State;
+    profiles : Profiles.State;
 }
 
 type Reducers<T> = {
@@ -15,7 +17,8 @@ type Reducers<T> = {
 
 const reducer : Reducers<AppState> = {
     session: Session.reducer,
-    configuration: Configuration.reducer
+    configuration: Configuration.reducer,
+    profiles: Profiles.reducer
 }
 
 const middleware = [...getDefaultMiddleware(), thunkMiddleware]

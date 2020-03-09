@@ -24,7 +24,7 @@ const Header : FunctionComponent = () => {
 
     return (
         <>
-            <AppBar>
+            <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" color="inherit">
                         <MenuIcon />
