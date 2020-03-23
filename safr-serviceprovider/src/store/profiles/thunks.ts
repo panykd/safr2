@@ -10,11 +10,15 @@ export const createFakeProfile = () => {
         const store = getStore();
         const id = `${store.profiles.ids.length}`
 
+        let firstName = Faker.name.firstName();
+        let lastName = Faker.name.lastName();
+
         let profile : Profile = {
             id,
-            givenName: Faker.name.firstName(),
-            familyName: Faker.name.lastName(),
-            email: Faker.internet.email()
+            givenName: firstName,
+            familyName: lastName,
+            email: Faker.internet.email(firstName, lastName),
+            age: Faker.random.number({min: 18, max: 28})
         }
 
         dispatch(actions.addProfile({profile}));

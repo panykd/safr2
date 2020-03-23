@@ -7,6 +7,7 @@ export interface Profile {
     givenName: string;
     familyName: string;
     email: string;
+    age: number;
 }
 
 // State Definitions
