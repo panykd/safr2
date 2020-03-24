@@ -20,7 +20,7 @@ const Safr : FunctionComponent = () => {
     const profiles = useSelector<AppState, Profiles.State>(store => store.profiles);
 
     const handleOnClick = (evt: React.MouseEvent<HTMLButtonElement>) => {
-        dispatch(ProfilesThunks.createFakeProfile());
+        dispatch(ProfilesThunks.getFakeProfile());
     }
 
     let profileCards = profiles.ids.map(id => <ProfileCard key={id} profileId={id} />)

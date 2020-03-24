@@ -33,6 +33,10 @@ namespace Api.Kestrel
 
             app.UseAuthorization();
 
+            app.UseCors(config => {
+                config.AllowAnyOrigin();
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

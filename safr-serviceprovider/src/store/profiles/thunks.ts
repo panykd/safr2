@@ -20,3 +20,17 @@ export const createFakeProfile = () => {
         dispatch(actions.addProfile({profile}));
     }
 }
+
+export const getFakeProfile = () => {
+    return async function(dispatch: Dispatch, getStore: () => AppState) {
+
+        const response = await fetch("http://localhost:5000/persona",
+        {
+            method: "get"
+        });
+
+        const profile = await response.json() as Profile;
+
+        dispatch(actions.addProfile({profile}));
+    }
+}
