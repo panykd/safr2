@@ -17,7 +17,10 @@ namespace Silo
                 .ConfigureServices(services => {
                 })
                 .UseOrleans(silo => {
-                    silo.UseLocalhostClustering();
+                    silo
+                    .UseLocalhostClustering()
+                    .AddMemoryGrainStorageAsDefault()
+                    .AddLogStorageBasedLogConsistencyProviderAsDefault();
                 })
             .RunConsoleAsync();
         }

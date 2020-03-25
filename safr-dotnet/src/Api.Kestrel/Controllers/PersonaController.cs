@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Bogus;
+using System.Threading.Tasks;
+using GrainInterfaces.Persona;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using static Bogus.DataSets.Name;
+using Orleans;
 
 namespace Api.Kestrel.Controllers
 {
@@ -13,19 +14,33 @@ namespace Api.Kestrel.Controllers
     public class PersonaController : ControllerBase
     {
         private readonly ILogger<PersonaController> _logger;
+        private readonly IClusterClient _clusterClient;
 
-        public PersonaController(ILogger<PersonaController> logger)
+        public PersonaController(ILogger<PersonaController> logger, IClusterClient clusterClient)
         {
             _logger = logger;
+            _clusterClient = clusterClient;
         }
 
-        public IActionResult Get()
+        [HttpPost]
+        public async Task<IActionResult> Create()
         {
-            var persona = PersonaFactory.Create();
+            var personaFactoryGrain = _clusterClient.GetGrain<IPersonaFactoryGrain>(Guid.Empty);
+
+            var personaId = await personaFactoryGrain.Create();
+
+            return Created(Url.Action(nameof(Get), new {id = personaId}), personaId);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var personaGrain = _clusterClient.GetGrain<IPersonaGrain>(id);
+
+            var persona = await personaGrain.Get();
 
             return Ok(persona);
         }
-
     }
 
     public class Persona
@@ -35,24 +50,5 @@ namespace Api.Kestrel.Controllers
         public string FamilyName { get; set; }
         
         public string Email { get; set; }
-    }
-
-    public class PersonaFactory
-    {
-        private static readonly Faker _faker = new Faker();
-
-        public static Persona Create()
-        {
-            var givenName = _faker.Name.FirstName(Gender.Female);
-            var familyName = _faker.Name.LastName();
-
-            return new Persona
-            {
-                Id = Guid.NewGuid(),
-                GivenName = givenName,
-                FamilyName = familyName,
-                Email = _faker.Internet.ExampleEmail(givenName, familyName)
-            };
-        }
     }
 }
