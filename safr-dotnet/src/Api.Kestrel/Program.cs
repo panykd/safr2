@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+using Orleans.Hosting;
+
 namespace Api.Kestrel
 {
     public class Program
@@ -14,6 +16,7 @@ namespace Api.Kestrel
         public static void Main(string[] args)
         {
             CreateHostBuilder(args)
+                .ConfigureLogging(logging => logging.AddConsole())
                 .Build()
                 .Run();
         }
