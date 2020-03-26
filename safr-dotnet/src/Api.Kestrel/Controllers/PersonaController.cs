@@ -29,7 +29,7 @@ namespace Api.Kestrel.Controllers
 
             var personaId = await personaFactoryGrain.Create();
 
-            return Created(Url.Action(nameof(Get), new {id = personaId}), personaId);
+            return Created(Url.Action(nameof(Get), new {id = personaId}), new {id = personaId});
         }
 
         [HttpGet("{id}")]

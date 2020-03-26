@@ -89,7 +89,7 @@ namespace Grains
             var minAge = 18;
             var maxAge = 30;
 
-            var dateOfBirth = faker.Date.Between(DateTime.UtcNow.AddYears(maxAge), DateTime.UtcNow.AddYears(minAge));
+            var dateOfBirth = faker.Date.Between(DateTime.UtcNow.AddYears(-maxAge), DateTime.UtcNow.AddYears(-minAge).Date);
 
 
             await personaGrain.ChangeName(givenName, familyName);

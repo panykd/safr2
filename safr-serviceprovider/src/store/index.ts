@@ -3,7 +3,7 @@ import { configureStore, getDefaultMiddleware, AnyAction, Reducer } from "@redux
 
 import * as Session from "./session";
 import * as Configuration from "./configuration";
-import * as Profiles from "./profiles";
+import * as Profiles from "./persona";
 
 export interface AppState {
     session: Session.State;

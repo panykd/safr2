@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 // State
 import { AppState } from "../store";
-import * as Profiles from "../store/profiles";
-import * as ProfilesThunks from "../store/profiles/thunks";
+import * as Profiles from "../store/persona";
+import * as ProfilesThunks from "../store/persona/thunks";
 
 // Components
 import Header from "./header";
@@ -20,7 +20,7 @@ const Safr : FunctionComponent = () => {
     const profiles = useSelector<AppState, Profiles.State>(store => store.profiles);
 
     const handleOnClick = (evt: React.MouseEvent<HTMLButtonElement>) => {
-        dispatch(ProfilesThunks.getFakeProfile());
+        dispatch(ProfilesThunks.createProfile());
     }
 
     let profileCards = profiles.ids.map(id => <ProfileCard key={id} profileId={id} />)

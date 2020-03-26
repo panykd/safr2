@@ -3,7 +3,7 @@ import { FunctionComponent } from "react"
 import { useSelector } from "react-redux"
 
 import { AppState } from "../../store"
-import { Profile } from "../../store/profiles"
+import { Profile } from "../../store/persona"
 
 import Card from "@material-ui/core/Card"
 
