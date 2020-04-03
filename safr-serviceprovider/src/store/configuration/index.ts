@@ -3,10 +3,12 @@ import { CaseReducer, PayloadAction, createSlice, Dispatch } from "@reduxjs/tool
 // State Definitions
 interface State {
     allowSignup: boolean;
+    serverUrl: string
 }
 
 const initialState : State = {
-    allowSignup: true
+    allowSignup: true,
+    serverUrl: "http://localhost:5000"
 }
 
 // Reducer Methods
